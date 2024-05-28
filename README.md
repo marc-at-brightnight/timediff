@@ -10,7 +10,7 @@ $ npm install --save timediff
 ```
 
 ```js
-var timediff = require('timediff');
+var timediff = require('lib/timediff');
 
 timediff('2015-01-01', '2018-05-02 02:15:10.777', 'YDHms');
 // => { years: 3, days: 121, hours: 2, minutes: 15, milliseconds: 10777 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var timediff = require('./timediff');
+var timediff = require('./lib/timediff');
 var pkg = require('./package.json');
 
 var start = process.argv[2];

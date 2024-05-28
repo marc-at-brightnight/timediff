@@ -1,4 +1,4 @@
-var timediff = require('../timediff.js');
+var timediff = require('../lib/timediff.js');
 var moment = require('moment');
 
 describe('timediff', function () {
