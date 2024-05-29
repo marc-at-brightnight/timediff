@@ -30,7 +30,7 @@
     "url": "git+https://github.com/marc-at-brightnight/timediff.git"
   },
   "dependencies": {
-    "moment": "^2.9.0"
+    "dayjs": "^1.11.11"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
