@@ -4,24 +4,21 @@ import DurationConstructor = moment.unitOfTime.DurationConstructor;
 import { Options } from './types';
 import { ReturnObj } from './types';
 
-export function timediff<ReturnZeros extends boolean = false>(
+function timediff<ReturnZeros extends boolean = false>(
   start: Date | string | 'now',
   end: Date | string | 'now',
   options?: Options<ReturnZeros>,
 ): ReturnZeros extends true ? ReturnObj : Partial<ReturnObj> {
   const now = new Date();
-  let sd;
-  let ed;
-  if (start === 'now') {
-    sd = now;
+
+  const sd = moment(start === 'now' ? now : start);
+  if (!sd.isValid()) {
+    throw 'invalid start date ' + sd;
   }
-  if (end === 'now') {
-    ed = now;
+  const ed = moment(end === 'now' ? now : end);
+  if (!ed.isValid()) {
+    throw 'invalid end date ' + ed;
   }
-  sd = moment(start);
-  if (!sd.isValid()) throw 'invalid start date ' + sd;
-  ed = moment(end);
-  if (!ed.isValid()) throw 'invalid end date ' + ed;
 
   const config: {
     units: Record<keyof ReturnObj, boolean>;
@@ -44,8 +41,6 @@ export function timediff<ReturnZeros extends boolean = false>(
 
   if (typeof options === 'string') {
     options = { units: options };
-  } else if (typeof options === 'function') {
-    options = { callback: options };
   }
 
   if (options) {
@@ -104,9 +99,6 @@ export function timediff<ReturnZeros extends boolean = false>(
     if (options.returnZeros === false) {
       config.returnZeros = false;
     }
-    if (typeof options.callback === 'function') {
-      config.callback = options.callback;
-    }
   }
 
   const result: Partial<ReturnObj> = {};
@@ -120,9 +112,7 @@ export function timediff<ReturnZeros extends boolean = false>(
     }
   }
 
-  if (config.callback) {
-    return config.callback(result) as ReturnZeros extends true ? ReturnObj : Partial<ReturnObj>;
-  }
-
   return result as ReturnZeros extends true ? ReturnObj : Partial<ReturnObj>;
 }
+
+export { timediff, ReturnObj, Options }

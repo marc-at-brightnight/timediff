@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { timediff } from '../lib';
 import expect from 'expect';
-import { Options } from '../lib/types';
+import { Options } from '../lib';
 
 describe('timediff', function () {
   it('should accept only parsable dates as first two parameters', function () {
@@ -153,49 +153,8 @@ describe('timediff', function () {
     expect(result).toEqual({ months: 3, days: 26, hours: 5, minutes: 4 });
   });
 
-  it('should provide the result to a callback if provided as options key', function (done) {
-    const options: Options = {
-      units: 'YMD',
-      callback: function (result) {
-        expect(result).toEqual({ years: 31, months: 3, days: 19 });
-        done();
-      },
-    };
-    timediff('1984-01-01', '2015-04-20 20:15:00', options);
-  });
-
-  it('should provide the result to a callback if provided as third parameter', function (done) {
-    const callback: Options = function (result) {
-      expect(result).toEqual({
-        years: 31,
-        months: 3,
-        weeks: 2,
-        days: 5,
-        hours: 20,
-        minutes: 15,
-        seconds: 0,
-        milliseconds: 0,
-      });
-      done();
-    };
-    timediff('1984-01-01', '2015-04-20 20:15:00', callback);
-  });
-
-  it('should return the result of the callback if callback is used', function (done) {
-    const options: Options = {
-      units: 'YMD',
-      callback: (result) => {
-        expect(result).toEqual({ years: 31, months: 3, days: 19 });
-        return `age: ${result.years} years, ${result.months} months and ${result.days} days`;
-      },
-    };
-    const result = timediff('1984-01-01', '2015-04-20 20:15:00', options);
-    expect(result).toBe('age: 31 years, 3 months and 19 days');
-    done();
-  });
-
-  it('should return the result if no callack is used', function () {
-    const result = timediff('2014-09-18 16:44:15', '2015-01-13 21:49:10', 'MDHm');
-    expect(result).toEqual({ months: 3, days: 26, hours: 5, minutes: 4 });
+  it('should accept now', function () {
+    const result = timediff('2014-09-18 16:44:15', 'now', 'Y');
+    expect(result).toEqual({ years: 9 });
   });
 });

@@ -29,16 +29,6 @@ index(new Date(2015, 1, 1), new Date('2018-05-02 02:15:10.777'), 'YWDHS');
 index(new Date(2015, 1, 1), new Date('2018-05-02 02:15:10.777'), 'MmSs');
 // => { months: 39, minutes: 1575, seconds: 10, milliseconds: 777 }
 
-// provide the result to a callback and return the result of the callback
-index('1969-06-09T06:09:06.069Z', new Date(), function (result) {
-    var strings = [];
-    for (var key in result) {
-        strings.push(result[key] + ' ' + key);
-    }
-    return 'age: ' + strings.join(', ');
-});
-// => 'age: 45 years, 7 months, 0 weeks, 6 days, 5 hours, 54 minutes, 5 seconds, 257 milliseconds'
-
 // combine all options
 var christmas = new Date();
 christmas.setMonth(11);
@@ -46,9 +36,6 @@ christmas.setDate(24);
 index(new Date(), christmas, {
     units: 'MWD',
     returnZeros: false,
-    callback: function (result) {
-        return 'Time until christmas: ' + JSON.stringify(result);
-    }
 });
 // => 'Time until christmas: {"months":11,"weeks":1,"days":1}'
 ```
@@ -130,13 +117,6 @@ the result.
 Type: boolean
 
 If `true` result can contain fields that are `0`, if `false` they are removed.
-
-##### options.callback
-
-Type: `function`
-
-Function that is called with the result of index as the first parameter.
-index returns the return value of this callback.
 
 ## Licence
 MIT copyright [Marco Taubmann]
