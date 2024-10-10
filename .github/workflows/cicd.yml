@@ -38,6 +38,10 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Create github release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.CICD_RELEASE_GITHUB_TOKEN }}
       - name: Configure npm for publishing
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Publish
