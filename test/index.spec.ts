@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 import { timediff } from '../lib';
 import expect from 'expect';
 import { Options } from '../lib';
@@ -155,6 +155,7 @@ describe('timediff', function () {
 
   it('should accept now', function () {
     const result = timediff('2014-09-18 16:44:15', 'now', 'Y');
-    expect(result).toEqual({ years: 9 });
+    expect(Object.keys(result)).toEqual(['years']);
+    expect(result.years).toBeGreaterThanOrEqual(10);
   });
 });
