@@ -1,6 +1,5 @@
 {
   "repositoryUrl": "https://github.com/marc-at-brightnight/timediff",
-  "branches": ["add-releases"],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -30,8 +29,5 @@
     ],
     "@semantic-release/github"
   ],
-  "npmPublish": false,
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+  "npmPublish": false
 }
